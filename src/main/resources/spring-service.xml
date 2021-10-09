@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+">
+
+
+<!--扫描service层相关的bean-->
+<!--指的是扫描这个包下的java类，如果其中含有注解就将它注册为bean-->
+    <context:component-scan base-package="service.impl"/>
+
+
+<!--UserServiceImpl注入到IOC容器中-->
+    <bean id="userServiceImpl" class="service.impl.UserServiceImpl">
+        <property name="userMapper" ref="userMapper"/>
+    </bean>
+    <bean id="heyTeaServiceImpl" class="service.impl.HeyTeaServiceImpl">
+        <property name="heyTeaMapper" ref="heyTeaMapper"/>
+    </bean>
+    <bean id="adminServiceImpl" class="service.impl.AdminServiceImpl">
+        <property name="adminMapper" ref="adminMapper"/>
+    </bean>
+    <bean id="orderServiceImpl" class="service.impl.OrderServiceImpl">
+        <property name="heyTeaMapper" ref="heyTeaMapper"/>
+        <property name="orderItemMapper" ref="orderItemMapper"/>
+        <property name="orderMapper" ref="orderMapper"/>
+    </bean>
+    <bean id="orderItemServiceImpl" class="service.impl.OrderItemServiceImpl">
+        <property name="orderItemMapper" ref="orderItemMapper"/>
+    </bean>
+
+
+
+<!--配置事务处理器-->
+
+    <bean id="transctionManger" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+<!--注入数据库连接池-->
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+</beans>

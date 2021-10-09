@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.OrderMapper">
+<!--public int saveOrder(Order order) throws SQLException;-->
+
+   <insert id="saveOrder" parameterType="order">
+        insert into t_order(order_id,create_time,price,status,user_id) values(#{orderId},#{createTime},#{price},#{status},#{userId});
+   </insert>
+
+    <!--public List<Order> showOrder(int id)throws SQLException;-->
+    <!--public List<Order> showOrder()throws SQLException;
+     mybatis是不支持方法的重载的，所以这里使用if语句来解决这个问题
+    -->
+    <select id="showOrder"  resultType="order">
+       select * from t_order
+       <where>
+          <if test="id!=null">
+              user_id=#{id}
+          </if>
+       </where>
+    </select>
+
+
+
+    <!--public int sendOrder(String id)throws SQLException;-->
+     
+    <update id="sendOrder">
+      update t_order set status=1 where order_id=#{id};
+    </update>
+    <!--public int recieveOrder(String id) throws SQLException;-->
+
+    <update id="recieveOrder">
+         update t_order set status=2 where order_id=#{id};
+    </update>
+
+    <!--public int sendEvaluate(String id,String evaluate)throws SQLException;-->
+
+     <insert id="sendEvaluate">
+         insert into heytea_evaluate(order_id,evaluate) values(#{id},#{evaluate});
+     </insert>
+
+    <!--public Evaluate showOrderEvaluate(String id)throws SQLException;-->
+
+     <select id="showOrderEvaluate" resultType="string">
+        select evaluate from heytea_evaluate where order_id=#{id};
+     </select>
+</mapper>

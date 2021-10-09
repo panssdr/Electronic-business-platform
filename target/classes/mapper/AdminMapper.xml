@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.AdminMapper">
+<!-- Admin findAdminByNameAndPwd(String adminName, String adminPwd);-->
+     <select id="findAdminByNameAndPwd" resultType="admin">
+         select * from admin where adminName=#{adminName} and adminPwd=#{adminPwd};
+     </select>
+
+    <update id="update">
+        update admin set adminPwd=#{newpassword} where adminName=#{adminName};
+    </update>
+</mapper>

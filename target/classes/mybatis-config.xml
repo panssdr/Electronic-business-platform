@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+<!--&lt;!&ndash;引入外部配置文件&ndash;&gt;-->
+<!--    <properties resource="druid.properties">-->
+<!--&lt;!&ndash;这里可以加入别的属性 如果这里定义的属性和映入外部配置文件中原有的属性同名 优先使用原有的属性值 如：这里加入一个password 使用的是原有的password&ndash;&gt;-->
+<!--        <property name="password" value="324"/>-->
+<!--    </properties>-->
+<!--   -->
+
+<!--     <settings>-->
+<!--&lt;!&ndash;标准的日志工厂实现&ndash;&gt;-->
+<!--&lt;!&ndash; <setting name="logImpl" value="STDOUT_LOGGING"/>&ndash;&gt;-->
+<!--       <setting name="logImpl" value="LOG4J"/>-->
+<!--     </settings>-->
+<!--    -->
+
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+<!--开启后数据库中的字段aaa_dsdaf在java中对等 aaaDsdaf-->
+<!--建议开启，这样子在java中书写会方便-->
+    </settings>
+    
+<!--取别名-->
+    <typeAliases>
+<!--typeAlias是找到全类名给它取别名-->
+<!--package 是扫面这个包下的所有javabean 每个javabean的默认别名就为这个类的类名， 首字母小写-->
+<!--实体类比较少的时候，使用第一种，
+ 如果实体类特别多 使用第二种-->
+<!--typeAlias去别名可以DIY
+ package则不行，如果非要改，需要在实体类上增加注解
+ 如：Alias（“HELLO”） public class User{} 然后扫描这个包 -->
+        <package name="domain"/>
+    </typeAliases>
+
+<!--注册mapper-->
+    <mappers>
+        <mapper resource="mapper/UserMapper.xml"/>
+        <mapper resource="mapper/HeyTeaMapper.xml"/>
+        <mapper resource="mapper/AdminMapper.xml"/>
+        <mapper resource="mapper/OrderItemMapper.xml"/>
+        <mapper resource="mapper/OrderMapper.xml"/>
+    </mappers>
+
+
+</configuration>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.UserMapper">
+      <select id="selectUser" resultType="user">
+          select * from users;
+      </select>
+
+<!--    public void  addUsers(Users user);-->
+    <insert id="addUsers" parameterType="user">
+       insert into users(username,password,email) values(#{username},#{password},#{email});
+    </insert>
+    
+ <!--     Users findUserByUnameAndUpwd(String uname, String upwd);-->
+    <select id="findUserByUnameAndUpwd" resultType="user">
+        select * from users where username = #{username} and password = #{password};
+    </select>
+  <!--    Users queryUserByUsername(String name);-->
+
+     <select id="queryUserByUsername" resultType="user">
+         select * from users where username = #{username};
+     </select>
+
+    <select id="getpassword" resultType="user">
+        select * from users where username=#{username} and email=#{email};
+    </select>
+    
+    
+    <select id="showLoginItem" parameterType="string" resultType="loginItem">
+        select * from login_item where username=#{username};
+    </select>
+
+    <update id="update">
+       update login_item set realname=#{realname},age=#{age},address=#{address},hobby=#{hobby} where username=#{username};
+    </update>
+</mapper>
